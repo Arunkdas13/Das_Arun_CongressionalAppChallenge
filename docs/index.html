@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spoonfed</title>
+<meta name="description" content="See how much of the politics in your feed you actually chose. Reads your TikTok or YouTube history in your browser. Nothing is uploaded.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cellipse cx='16' cy='9.5' rx='6' ry='7.5' fill='%23157a4b'/%3E%3Crect x='14.5' y='15' width='3' height='15' rx='1.5' fill='%23000'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="#/" aria-label="Spoonfed home">
+      <svg width="16" height="22" viewBox="0 0 16 22" aria-hidden="true"><ellipse cx="8" cy="6" rx="5.5" ry="6" fill="#157a4b"/><rect x="6.6" y="10.5" width="2.8" height="11.5" rx="1.4" fill="#000"/></svg>
+      <span class="word">Spoonfed</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#/">Analyze</a>
+      <a href="#/method">How it works</a>
+      <a href="#/research">Research</a>
+      <a href="#/about" class="hide-sm">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- ANALYZE -->
+<section id="view-analyze" data-view="analyze">
+  <div class="wrap">
+    <div class="intro">
+      <h1>How much of your politics did you choose?</h1>
+      <p>Spoonfed reads your TikTok or YouTube watch history and shows what your feed taught you about politics, what it left out, and how much of it you went looking for yourself. Your file is read in this browser and never uploaded.</p>
+    </div>
+
+    <div class="load">
+      <div class="drop" id="drop">
+        <h2>Open your watch history</h2>
+        <p class="muted small" style="margin:0">The TikTok download (user_data_tiktok.json or the zip) or the YouTube files from Google Takeout (watch-history.json and search-history.json, or the whole zip). Choose JSON when you request it.</p>
+        <div class="row">
+          <label class="btn" for="file">Choose file</label>
+          <input id="file" type="file" accept=".json,.zip,application/json,application/zip" multiple hidden>
+          <span class="muted small">or drop it here</span>
+        </div>
+        <p class="error" id="error" role="alert" hidden></p>
+      </div>
+      <div class="samples">
+        <h2>No file yet?</h2>
+        <p class="muted small" style="margin:0">Open a sample history from a fictional user to see a full report.</p>
+        <div class="row" style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn ghost" data-sample="tiktok">TikTok sample</button>
+          <button class="btn ghost" data-sample="youtube">YouTube sample</button>
+        </div>
+      </div>
+    </div>
+
+    <details class="howto">
+      <summary>How to get your file</summary>
+      <div class="cols">
+        <div>
+          <h3>TikTok</h3>
+          <ol>
+            <li>Open Settings and privacy, then Account.</li>
+            <li>Tap Download your data.</li>
+            <li>Select All data and the JSON format, then Request data.</li>
+            <li>When it is ready (often within a day), download the zip and open it here.</li>
+          </ol>
+        </div>
+        <div>
+          <h3>YouTube</h3>
+          <ol>
+            <li>Go to takeout.google.com and select only YouTube and YouTube Music.</li>
+            <li>Under the YouTube options, choose history only and set the history format to JSON.</li>
+            <li>Create the export and download the zip from the email.</li>
+            <li>Open the zip here, or the two files inside its history folder.</li>
+          </ol>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div id="report" hidden></div>
+</section>
+
+<!-- METHOD -->
+<section id="view-method" data-view="method" hidden>
+  <div class="wrap page">
+    <h1>How every number is calculated</h1>
+    <p class="lede muted">Spoonfed uses fixed, readable rules. There is no AI model and no server. The rules live in plain files you can open, and changing a file changes the results.</p>
+
+    <h2>What counts as political</h2>
+    <p>A video is political if its title contains a word or phrase from one of 18 topic lists, such as Immigration and the border or Energy and utilities. Matching is on whole words, so "olive oil pasta" and "bluetooth speaker" do not count. A title that names a politician or an office, such as "the Speaker" or "senator", also counts. The lists are in <a href="data/topics.json"><code>data/topics.json</code></a>.</p>
+
+    <h2>Chosen and fed</h2>
+    <p>A political video counts as <strong>chosen</strong> if you searched for something on the same topic, or with a word from its title, in the 30 minutes before you watched it. Every other political video counts as <strong>fed</strong>: the app put it in front of you. This is generous to you. A video you watched after searching for something only loosely related still counts as chosen.</p>
+
+    <h2>Voices, and the funnel</h2>
+    <p>For each week, Spoonfed counts how many political videos came from each creator and turns that into an <strong>effective number of voices</strong>. If 10 creators each made an equal share of your political videos, that is 10 voices. If one creator made almost all of them, it is close to 1, no matter how many others appeared once. Technically it is the exponential of the Shannon entropy of the creator shares. When this number falls from week to week, your feed is narrowing.</p>
+
+    <h2>Tone</h2>
+    <p>Each political title gets a conflict score. Each conflict word such as "destroys", "slams" or "exposed" adds 1. A title written mostly in capitals, or with a word in all caps, adds 1. Two or more exclamation or question marks in a row add 1. A score of 2 or more is labeled <strong>conflict</strong>. A score of 0 with an explaining word such as "explained", "breakdown" or "roll call" is labeled <strong>explaining</strong>. The rest are neutral. The word lists are in <a href="data/tone.json"><code>data/tone.json</code></a>.</p>
+
+    <h2>About a person, or about a policy</h2>
+    <p>A political title that names a politician or an office counts as being about a person. One title can be about both a person and a policy.</p>
+
+    <h2>What Congress voted on</h2>
+    <p>Spoonfed includes final-passage roll call votes from the U.S. House, taken from the House Clerk's records, with each bill placed in a topic based on its title. Procedural votes are left out. For your report, it uses the votes held during the weeks your history covers. A topic is a <strong>blind spot</strong> when the House held at least two votes on it and it made up less than 2% of your political videos. The vote list is in <a href="data/house-votes.json"><code>data/house-votes.json</code></a>, and <code>scripts/refresh_votes.py</code> updates it.</p>
+
+    <h2>Lean</h2>
+    <p>Spoonfed does not label any creator or outlet as left or right. You rate the sources that fed you most, and the report shows the lean of your feed using your own ratings. Each source has a link to look it up first. Deciding for yourself is the point.</p>
+
+    <h2>Go find it</h2>
+    <p>The challenges are built from your report: your biggest blind spot, the topic where one creator dominated, and the topic most often framed as a fight. Each one sends you to a primary source, such as the bill on Congress.gov or the roll call at the House Clerk, and never to a summary. When you finish one, you can save the link you found.</p>
+
+    <h2>Privacy</h2>
+    <p>Your file is opened with your browser's file reader and analyzed on your device. Nothing is sent anywhere. If you choose to save a result, a short summary of the numbers is kept in this browser's local storage, with no titles or links, so you can compare next month. Clearing your browser data removes it.</p>
+
+    <h2>Limits</h2>
+    <p>Spoonfed reads titles, not videos, so it misses sarcasm, images and anything said out loud. Some TikTok downloads leave out titles or creator names, and the report says when that happens. The Congress comparison covers the House only. The rules are deliberately simple so anyone can check them, and that means some videos will be sorted wrong.</p>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="view-research" data-view="research" hidden>
+  <div class="wrap page">
+    <h1>What the research says</h1>
+    <p class="lede muted">Feeds change what people see, and quickly. Whether they change what people believe is still argued about. Who is choosing is not in question. Here are the studies Spoonfed is built on, including the ones that complicate the story.</p>
+
+    <div class="study">
+      <h3>A growing share of Americans get news from TikTok</h3>
+      <p class="src">Pew Research Center, survey of 5,166 U.S. adults, August 24 to 30, 2026</p>
+      <p>20% of U.S. adults regularly get news on TikTok, up from 3% in 2020. Among adults under 30 it is 39%, up from 9% in 2020.</p>
+      <p class="caveat">Self-reported. "Regularly" is the respondent's own judgment.</p>
+      <a class="small" href="https://www.pewresearch.org/short-reads/2026/10/19/1-in-5-americans-regularly-get-news-on-tiktok-2/">Read the study</a>
+    </div>
+
+    <div class="study">
+      <h3>Once a feed tilts, it does not fully reset</h3>
+      <p class="src">Audit of TikTok recommendations during the 2024 election, 323 experiments with automated accounts in New York, Texas and Georgia, April to November 2024</p>
+      <p>After an account watched political videos from one side, political content in its recommendations spiked. The spike faded as it watched more, but it never fell back to the level of a fresh account. The researchers also measured an uneven tilt: accounts conditioned on Republican content got about 11.5% more same-party recommendations than accounts conditioned on Democratic content, which got about 8% more from the other party.</p>
+      <p class="caveat">These were automated accounts, not people, during a single election season.</p>
+      <a class="small" href="https://arxiv.org/abs/2501.17831">Read the study</a>
+    </div>
+
+    <div class="study">
+      <h3>Changing the feed changed what people saw, but not their views</h3>
+      <p class="src">Field experiment on Facebook and Instagram during the 2020 election, published in Science, 2023</p>
+      <p>Users who were switched to a plain chronological feed for three months spent less time on the apps and saw more political content and more content from untrustworthy sources. Their levels of polarization and political knowledge did not change significantly.</p>
+      <p class="caveat">Three months may be too short to change long-held views, and a chronological feed is still a feed you did not choose.</p>
+      <a class="small" href="https://csmapnyu.org/research/academic-research/how-do-social-media-feed-algorithms-affect-attitudes-and-behavior-in-an-election-campaign">Read the study</a>
+    </div>
+
+    <div class="study">
+      <h3>On YouTube, people's own choices drove partisan viewing more than the recommendations did</h3>
+      <p class="src">Counterfactual bot study of YouTube recommendations, data from 2021 to 2023</p>
+      <p>Bots that followed only the recommendations ended up watching less partisan content than the real users they were modeled on. The researchers conclude that, at least since YouTube's 2019 changes, what people pick for themselves matters more than what the algorithm pushes.</p>
+      <p class="caveat">This is the strongest evidence against blaming the algorithm alone. It is also a reason to measure your own habits, not just the app's.</p>
+      <a class="small" href="https://arxiv.org/abs/2308.10398">Read the study</a>
+    </div>
+
+    <div class="study">
+      <h3>The rules can change overnight</h3>
+      <p class="src">Meta announcement, February 2024</p>
+      <p>Meta stopped recommending political content by default on Instagram and Threads, for accounts users did not already follow, with a setting to opt back in. Millions of people's political diet changed without them choosing it.</p>
+      <a class="small" href="https://wjla.com/news/beyond-the-podium/meta-to-stop-recommending-political-content-on-instagram-threads-facebook-2024-election-integrity-content-moderation-fake-news-misinformation-social-media-trust-and-safety">Read the report</a>
+    </div>
+
+    <div class="study">
+      <h3>Handing off thinking is linked to doing less of it</h3>
+      <p class="src">Gerlich, Societies, January 2025. Survey of 666 people and interviews with 50</p>
+      <p>People who relied most on AI tools scored lower on critical thinking, and the link ran through cognitive offloading: letting the tool do the work. The effect was strongest for people aged 17 to 25.</p>
+      <p class="caveat">This is a correlation, not proof of cause. People who already think less critically may simply rely on tools more.</p>
+      <a class="small" href="https://psypost.org/2025/03/ai-tools-may-weaken-critical-thinking-skills-by-encouraging-cognitive-offloading-study-suggests-227092">Read the summary</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="view-about" data-view="about" hidden>
+  <div class="wrap page">
+    <p class="about-lines">
+      <span>Arun Das</span>
+      <span>Senior</span>
+      <span>Town of North Castle intern</span>
+    </p>
+  </div>
+</section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <span>Spoonfed runs in your browser. No account, no tracking, no uploads.</span>
+    <a href="https://github.com/Arunkdas13/Spoonfed">Source code</a>
+  </div>
+</footer>
+
+<script src="js/vendor/jszip.min.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

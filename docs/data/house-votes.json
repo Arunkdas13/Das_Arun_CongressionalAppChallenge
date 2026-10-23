@@ -1,0 +1,287 @@
+{
+  "source": "Office of the Clerk, U.S. House of Representatives, roll call votes, 119th Congress, 2nd session",
+  "sourceUrl": "https://clerk.house.gov/Votes",
+  "retrieved": "2026-10-23",
+  "note": "Final-passage and similar votes only. Procedural votes (rules, previous question, motions to recommit, amendments) are left out. A topic of null means the title alone does not say what the bill covers; it is listed but not counted in topic comparisons. Refresh with scripts/refresh_votes.py.",
+  "votes": [
+    {
+      "date": "2026-09-16",
+      "roll": 314,
+      "bill": "S. 2403",
+      "title": "Retire through Ownership Act",
+      "topic": "retirement",
+      "yea": 401,
+      "nay": 14
+    },
+    {
+      "date": "2026-09-16",
+      "roll": 313,
+      "bill": "H.R. 9497",
+      "title": "Water Resources Development Act",
+      "topic": "infrastructure",
+      "yea": 415,
+      "nay": 9
+    },
+    {
+      "date": "2026-09-16",
+      "roll": 312,
+      "bill": "H.R. 9340",
+      "title": "Ratepayer Protection Act",
+      "topic": "energy",
+      "yea": 417,
+      "nay": 3
+    },
+    {
+      "date": "2026-09-16",
+      "roll": 311,
+      "bill": "H.J.Res. 213",
+      "title": "Disapproving an EPA rule on California harbor craft engine standards",
+      "topic": "environment",
+      "yea": 214,
+      "nay": 208
+    },
+    {
+      "date": "2026-09-16",
+      "roll": 310,
+      "bill": "H.R. 10326",
+      "title": "PROOF Act",
+      "topic": null,
+      "yea": 217,
+      "nay": 207
+    },
+    {
+      "date": "2026-09-16",
+      "roll": 309,
+      "bill": "H.R. 9576",
+      "title": "National Fraud Enforcement Division Act",
+      "topic": "justice",
+      "yea": 352,
+      "nay": 72
+    },
+    {
+      "date": "2026-09-16",
+      "roll": 308,
+      "bill": "H.R. 5334",
+      "title": "Letting early childhood educators take the educator expense deduction",
+      "topic": "education",
+      "yea": 262,
+      "nay": 159
+    },
+    {
+      "date": "2026-09-15",
+      "roll": 307,
+      "bill": "H.Con.Res. 93",
+      "title": "Directing removal of U.S. forces from hostilities with Iran (War Powers)",
+      "topic": "foreign",
+      "yea": 220,
+      "nay": 204
+    },
+    {
+      "date": "2026-09-15",
+      "roll": 306,
+      "bill": "H.J.Res. 210",
+      "title": "Disapproving an EPA rule on California ocean-going vessels at berth",
+      "topic": "environment",
+      "yea": 216,
+      "nay": 211
+    },
+    {
+      "date": "2026-09-15",
+      "roll": 305,
+      "bill": "H.R. 9500",
+      "title": "Tax Relief for Fraud Victims Act",
+      "topic": "taxes",
+      "yea": 408,
+      "nay": 17
+    },
+    {
+      "date": "2026-09-15",
+      "roll": 304,
+      "bill": "H.R. 2140",
+      "title": "Diesel Emissions Reduction Act",
+      "topic": "environment",
+      "yea": 343,
+      "nay": 79
+    },
+    {
+      "date": "2026-09-15",
+      "roll": 303,
+      "bill": "H.R. 4646",
+      "title": "Whistleblower Protection Act",
+      "topic": "justice",
+      "yea": 424,
+      "nay": 0
+    },
+    {
+      "date": "2026-09-15",
+      "roll": 302,
+      "bill": "H.R. 8278",
+      "title": "Using technology in financial supervision (FUTURE Supervision Act)",
+      "topic": "economy",
+      "yea": 417,
+      "nay": 7
+    },
+    {
+      "date": "2026-09-15",
+      "roll": 301,
+      "bill": "H.R. 2978",
+      "title": "GUARD Act",
+      "topic": null,
+      "yea": 414,
+      "nay": 7
+    },
+    {
+      "date": "2026-09-15",
+      "roll": 298,
+      "bill": "H.Res. 1486",
+      "title": "Motion to table articles of impeachment against the President",
+      "topic": "elections",
+      "yea": 232,
+      "nay": 147
+    },
+    {
+      "date": "2026-09-14",
+      "roll": 297,
+      "bill": "H.R. 3276",
+      "title": "Local Communities and Bird Habitat Stewardship Act",
+      "topic": "environment",
+      "yea": 345,
+      "nay": 60
+    },
+    {
+      "date": "2026-09-14",
+      "roll": 296,
+      "bill": "H.R. 4219",
+      "title": "National Wildlife Refuge System Invasive Species Strike Team Act",
+      "topic": "environment",
+      "yea": 371,
+      "nay": 33
+    },
+    {
+      "date": "2026-09-03",
+      "roll": 295,
+      "bill": "H.R. 4795",
+      "title": "Protect Economic and Academic Freedom Act",
+      "topic": null,
+      "yea": 237,
+      "nay": 169
+    },
+    {
+      "date": "2026-09-02",
+      "roll": 294,
+      "bill": "H.R. 1501",
+      "title": "Protecting Domestic Mining Act",
+      "topic": "energy",
+      "yea": 218,
+      "nay": 201
+    },
+    {
+      "date": "2026-09-02",
+      "roll": 293,
+      "bill": "H.J.Res. 1",
+      "title": "Constitutional amendment setting the Supreme Court at nine justices (failed)",
+      "topic": "elections",
+      "yea": 212,
+      "nay": 206
+    },
+    {
+      "date": "2026-09-01",
+      "roll": 292,
+      "bill": "H.Res. 1498",
+      "title": "Resolution on allegations relating to a member of the House",
+      "topic": "congress",
+      "yea": 413,
+      "nay": 2
+    },
+    {
+      "date": "2026-09-01",
+      "roll": 291,
+      "bill": "H.R. 9436",
+      "title": "Extending North Atlantic right whale vessel rules",
+      "topic": "environment",
+      "yea": 219,
+      "nay": 196
+    },
+    {
+      "date": "2026-09-01",
+      "roll": 289,
+      "bill": "H.Res. 1490",
+      "title": "Resolution condemning socialism",
+      "topic": "congress",
+      "yea": 220,
+      "nay": 192
+    },
+    {
+      "date": "2026-09-01",
+      "roll": 286,
+      "bill": "H.R. 6500",
+      "title": "AGOA Extension Act (trade with African countries)",
+      "topic": "trade",
+      "yea": 370,
+      "nay": 48
+    },
+    {
+      "date": "2026-08-31",
+      "roll": 285,
+      "bill": "S. 32",
+      "title": "Local Access to Courts Act",
+      "topic": "justice",
+      "yea": 378,
+      "nay": 10
+    },
+    {
+      "date": "2026-08-31",
+      "roll": 284,
+      "bill": "S. 307",
+      "title": "Prison Staff Safety Enhancement Act",
+      "topic": "justice",
+      "yea": 376,
+      "nay": 8
+    },
+    {
+      "date": "2026-07-23",
+      "roll": 283,
+      "bill": "H.R. 8884",
+      "title": "Removing Barriers to Work for Disabled Americans Act",
+      "topic": null,
+      "yea": 232,
+      "nay": 188
+    },
+    {
+      "date": "2026-07-23",
+      "roll": 282,
+      "bill": "H.Con.Res. 89",
+      "title": "Directing removal of U.S. forces from hostilities with Iran (War Powers)",
+      "topic": "foreign",
+      "yea": 214,
+      "nay": 208
+    },
+    {
+      "date": "2026-07-22",
+      "roll": 281,
+      "bill": "H.Con.Res. 113",
+      "title": "Congressional budget for fiscal year 2027",
+      "topic": "taxes",
+      "yea": 216,
+      "nay": 214
+    },
+    {
+      "date": "2026-07-22",
+      "roll": 280,
+      "bill": "H.R. 7008",
+      "title": "Stop Insider Trading Act",
+      "topic": "justice",
+      "yea": 232,
+      "nay": 198
+    },
+    {
+      "date": "2026-07-22",
+      "roll": 278,
+      "bill": "H.R. 8800",
+      "title": "National Defense Authorization Act for fiscal year 2027",
+      "topic": "defense",
+      "yea": 216,
+      "nay": 212
+    }
+  ]
+}
