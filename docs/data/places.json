@@ -1,0 +1,9 @@
+{
+  "note": "Household counts from the U.S. Census Bureau. Used only for the 'If everyone did it' estimate.",
+  "places": [
+    { "id": "ny17", "name": "New York's 17th congressional district", "households": 261372, "source": "American Community Survey 2024 1-year, via Census Reporter", "url": "https://censusreporter.org/profiles/50000US3617-congressional-district-17-ny/" },
+    { "id": "rockland", "name": "Rockland County", "households": 103879, "source": "Census QuickFacts, households 2020-2024", "url": "https://www.census.gov/quickfacts/fact/table/rocklandcountynewyork/" },
+    { "id": "nys", "name": "New York State", "households": 7722646, "source": "Census QuickFacts, households 2020-2024", "url": "https://www.census.gov/quickfacts/fact/table/NY/" },
+    { "id": "us", "name": "United States", "households": 132737144, "source": "American Community Survey 2024 1-year, via Census Reporter", "url": "https://censusreporter.org/profiles/01000US-united-states/" }
+  ]
+}

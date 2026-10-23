@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a1222">
+<title>Kilowhen</title>
+<meta name="description" content="When to use electricity so the grid's dirtiest, most expensive power plants stay off. Live hourly grid prices and forecasts.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%233dd6c0' stroke-width='4'/%3E%3Cpath d='M16 3a13 13 0 0 1 11.3 6.5' fill='none' stroke='%23ffb224' stroke-width='4'/%3E%3Cpath d='M16 16V8' stroke='%23e9eef6' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-now" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-plan" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="15" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M7 14h4M7 17h7"/></symbol>
+  <symbol id="i-together" viewBox="0 0 24 24"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M3 19c.6-3 2.6-4.5 5-4.5s4.4 1.5 5 4.5M11 19c.6-3 2.6-4.5 5-4.5s4.4 1.5 5 4.5"/></symbol>
+  <symbol id="i-week" viewBox="0 0 24 24"><path d="M4 4h4v4H4zM10 4h4v4h-4zM16 4h4v4h-4zM4 10h4v4H4zM10 10h4v4h-4zM16 10h4v4h-4zM4 16h4v4H4zM10 16h4v4h-4zM16 16h4v4h-4z"/></symbol>
+  <symbol id="i-how" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></symbol>
+  <symbol id="i-about" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c1-4 4-6 8-6s7 2 8 6"/></symbol>
+  <symbol id="logo" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12.5" fill="none" stroke="#3dd6c0" stroke-width="3.2"/><path d="M16 3.5a12.5 12.5 0 0 1 10.8 6.25" fill="none" stroke="#ffb224" stroke-width="3.2"/><path d="M16 16V9" stroke="#e9eef6" stroke-width="2.6" stroke-linecap="round"/></symbol>
+</svg>
+
+<div class="shell">
+  <nav class="rail" aria-label="Main">
+    <a class="brand" href="#/now"><svg width="26" height="26"><use href="#logo"/></svg>Kilowhen</a>
+    <a class="tab" href="#/now"><svg><use href="#i-now"/></svg>Now</a>
+    <a class="tab" href="#/plan"><svg><use href="#i-plan"/></svg>Plan my day</a>
+    <a class="tab" href="#/together"><svg><use href="#i-together"/></svg>If we all did it</a>
+    <a class="tab" href="#/week"><svg><use href="#i-week"/></svg>This week</a>
+    <div class="sep"></div>
+    <a class="tab" href="#/how"><svg><use href="#i-how"/></svg>How it works</a>
+    <a class="tab" href="#/about"><svg><use href="#i-about"/></svg>About</a>
+    <div class="foot" id="source-foot"></div>
+  </nav>
+
+  <div class="main">
+    <header class="topbar">
+      <a class="brand" href="#/now"><svg width="24" height="24"><use href="#logo"/></svg>Kilowhen</a>
+      <div class="where">
+        <label class="small muted" for="region">Grid</label>
+        <select id="region" class="select"></select>
+        <label class="small muted" for="zone">Area</label>
+        <select id="zone" class="select"></select>
+        <span class="tip" tabindex="0" data-tip="New York's grid operator prices power separately in 11 areas called zones. Rockland, Putnam and most of the Hudson Valley are in Zone G. Pick the one you live in.">?</span>
+      </div>
+      <div class="stamp" id="stamp"></div>
+    </header>
+
+    <main>
+      <section class="view" data-view="now" id="view-now"></section>
+      <section class="view" data-view="plan" id="view-plan" hidden></section>
+      <section class="view" data-view="together" id="view-together" hidden></section>
+      <section class="view" data-view="week" id="view-week" hidden></section>
+
+      <section class="view" data-view="how" hidden>
+        <h1>How it works</h1>
+        <p class="sub">Kilowhen uses public grid data and fixed, readable formulas. There is no AI, no account and no tracking.</p>
+        <div class="prose">
+          <h2>Where the numbers come from</h2>
+          <p>For New York, Kilowhen reads three public files from the New York Independent System Operator (NYISO), which runs the state's power grid. The <strong>day-ahead price</strong> is the wholesale price of electricity for each hour of the next day, set every morning for each of New York's 11 zones. The <strong>load forecast</strong> is NYISO's prediction of how much power each zone will use each hour. The <strong>fuel mix</strong> is what is actually generating power right now, by fuel, every five minutes. A scheduled job copies the newest files every 30 minutes.</p>
+          <p>For other U.S. regions, Kilowhen uses the federal Hourly Electric Grid Monitor from the U.S. Energy Information Administration. Those regions have no free hourly price, so Kilowhen times your loads by expected pollution instead, using each hour's average pounds of CO2 per megawatt-hour over the past week.</p>
+
+          <h2>Peak hours</h2>
+          <p>An hour counts as a <strong>peak hour</strong> when its price is in the most expensive quarter of the day, at least 25% above the day's median, and, when a load forecast exists, demand is within 8% of the day's highest. These are the hours when the grid has to call on its last and most expensive power plants. In New York those are often older gas and oil units called <strong>peakers</strong>, many of them near the homes they serve.</p>
+
+          <h2>The best time to run something</h2>
+          <p>For each appliance, Kilowhen looks at every possible start time between when you would normally start it and when it has to be done. It adds up the price of every hour the appliance would run, then picks the start with the lowest total. Savings are shown at wholesale prices, which is what the energy itself costs the grid. Your bill adds delivery charges and taxes on top. If you are on a time-of-use plan, enter your rates on the Plan page to see your actual savings.</p>
+
+          <h2>Pollution</h2>
+          <p>When generation data is available, each hour gets an estimated emissions rate: the mix of fuels running that hour multiplied by typical pounds of CO2 per megawatt-hour for each fuel. Kilowhen uses approximately 900 for natural gas, 1,150 for New York's dual-fuel units, 1,700 for oil, 2,200 for coal, and zero for nuclear, hydro, wind and solar. These are estimates. Actual plants vary.</p>
+
+          <h2>If we all did it</h2>
+          <p>This multiplies the number of households in a place, from the U.S. Census, by the share of homes taking part and by how much power each home moves out of peak hours. It compares the result with the size of a typical peaker unit and with the area's forecast peak. Every input can be changed. It is a what-if, not a prediction.</p>
+
+          <h2>Limits</h2>
+          <p>Prices are the day-ahead market, which can differ from real-time prices. Zones do not line up exactly with towns or congressional districts. The peak-hour rule is a simple, transparent test, not NYISO's own dispatch.</p>
+        </div>
+      </section>
+
+      <section class="view" data-view="about" hidden>
+        <p class="about"><span>Arun Das</span><span>Senior</span><span>Town of North Castle intern</span></p>
+      </section>
+    </main>
+  </div>
+</div>
+
+<nav class="tabbar" aria-label="Main">
+  <a href="#/now"><svg><use href="#i-now"/></svg>Now</a>
+  <a href="#/plan"><svg><use href="#i-plan"/></svg>Plan</a>
+  <a href="#/together"><svg><use href="#i-together"/></svg>Together</a>
+  <a href="#/week"><svg><use href="#i-week"/></svg>Week</a>
+  <a href="#/how"><svg><use href="#i-how"/></svg>How</a>
+</nav>
+
+<script src="js/engine.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

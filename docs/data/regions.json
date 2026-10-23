@@ -1,0 +1,6 @@
+{
+  "note": "Regions the app can show. New York comes from NYISO with real prices. Other U.S. regions are added by scripts/fetch_eia.py when an EIA key is configured.",
+  "regions": [
+    { "id": "ny", "name": "New York (NYISO)", "file": "ny.json", "kind": "price" }
+  ]
+}

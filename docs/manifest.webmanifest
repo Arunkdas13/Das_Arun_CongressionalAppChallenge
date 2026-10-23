@@ -1,0 +1,10 @@
+{
+  "name": "Kilowhen",
+  "short_name": "Kilowhen",
+  "description": "When to use electricity so the dirtiest power plants stay off.",
+  "start_url": "./#/now",
+  "display": "standalone",
+  "background_color": "#0a1222",
+  "theme_color": "#0a1222",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}
