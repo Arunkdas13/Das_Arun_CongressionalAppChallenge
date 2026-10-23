@@ -2,14 +2,16 @@
 
 When to use electricity so the grid's dirtiest, most expensive power plants stay off.
 
-Kilowhen reads public, hourly grid data and turns it into everyday decisions:
+Kilowhen is one interactive scene of a real day on New York's power grid.
 
-- **Now:** whether to run the big appliances right now or wait, and how long. The Peaker Clock shows the whole day at a glance, with peak hours marked.
-- **Plan my day:** pick your appliances (car charger, dryer, dishwasher, water heater and so on). Kilowhen finds the start time for each one that costs the grid the least before your deadline, and shows the savings and the energy moved out of peak hours. Add your utility's time-of-use rates to see bill savings.
-- **If we all did it:** how many megawatts a town, district, state or the whole country would take off the evening peak if some share of homes did the same thing, compared with the size of a peaker plant.
-- **This week:** every hour of the week as a heatmap, the cheapest and priciest hours, and how much the answer changes between New York's 11 zones.
+- **The ridge** is New York's forecast electricity demand for every hour, from NYISO.
+- **The amber** is demand above the peaker line, when the grid has to switch on its last and most expensive plants. Smokestacks in the town light up to match.
+- **Drag your appliances** (dryer, dishwasher, car charger) out of the amber hours and watch the cost of each one change.
+- **Slide "Homes doing what you did"** from just you up to half of New York's 17th district (U.S. Census household counts) and watch the ridge redraw and the stacks go dark.
+- **Stagger the homes** spreads everyone's shifted power into the quietest hours, so the community doesn't just create a new peak at 1 AM.
+- **Play the day** runs all 24 hours in ten seconds.
 
-No account, no tracking and no AI. Every formula is on the How it works page.
+There's no account, no tracking and no AI. The "How it works" panel explains every formula.
 
 ## Data
 
@@ -26,6 +28,11 @@ The files in `docs/data/` are refreshed every 30 minutes by `.github/workflows/r
 3. In Settings, open Actions, then General. Under "Workflow permissions", choose "Read and write permissions".
 4. In the Actions tab, open "Refresh grid data" and click "Run workflow" once. After that it runs on its own every 30 minutes.
 5. Optional, to add the rest of the U.S.: get a free key at https://www.eia.gov/opendata/register.php. Then add it in Settings under Secrets and variables, Actions, as a new repository secret named `EIA_API_KEY`.
+
+## Demo tips
+
+- Add `?at=2026-10-23T18` to the URL to start the scene at 6 PM on a given day.
+- Use the left and right arrow keys on the scene to step through the hours, or on an appliance to move it.
 
 ## Run locally
 

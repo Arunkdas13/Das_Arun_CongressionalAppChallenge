@@ -151,6 +151,24 @@
     return { homes, mw, units: unitMw ? mw / unitMw : null, shareOfPeak: zonePeakMw ? mw / zonePeakMw : null };
   }
 
-  const api = { EMISSIONS, FOSSIL, PEAKER_CLASS, peakHours, windows, timeline, intensity, indexOf, bestStart, plan, nextHour, now, week, together, median, quantile };
+  /**
+   * Community schedule: take the usual appliance energy out of its usual hours, then pour the same energy into the
+   * lowest-demand hours that are not peak hours, like water filling a valley. Returns the adjusted hourly MW.
+   */
+  function fillValley(base, usual, homes, peaks) {
+    const level = base.slice();
+    let energy = 0;
+    usual.forEach(u => { for (let i = 0; i < u.hours; i++) { level[(u.start + i) % 24] -= homes * u.kw / 1000; } energy += homes * u.kw * u.hours / 1000; });
+    const ok = level.map((_, h) => !peaks.includes(h));
+    let lo = Math.min(...level), hi = Math.max(...level) + energy;
+    for (let it = 0; it < 60; it++) {
+      const mid = (lo + hi) / 2;
+      const poured = level.reduce((a, v, h) => a + (ok[h] ? Math.max(0, mid - v) : 0), 0);
+      if (poured > energy) hi = mid; else lo = mid;
+    }
+    return level.map((v, h) => ok[h] ? Math.max(v, lo) : v);
+  }
+
+  const api = { fillValley, EMISSIONS, FOSSIL, PEAKER_CLASS, peakHours, windows, timeline, intensity, indexOf, bestStart, plan, nextHour, now, week, together, median, quantile };
   if (typeof module !== "undefined" && module.exports) module.exports = api; else root.Kilowhen = api;
 })(typeof window !== "undefined" ? window : globalThis);

@@ -63,4 +63,14 @@ if (fs.existsSync(real)) t("real NYISO file builds a usable Hudson Valley timeli
   assert.ok(tl.some(x => x.peak)); assert.ok(d.zones.length === 11);
   const w = K.week(d, "HUD VL"); console.log("     real week:", d.days.join(","), "cheapest", w.cheapestHour, "priciest", w.priciestHour, "ratio", w.ratio.toFixed(2));
 });
+t("fill the valley spreads energy without creating a new peak", () => {
+  const base = [10, 9, 8, 8, 9, 10, 12, 14, 13, 12, 11, 11, 11, 11, 12, 13, 15, 18, 20, 19, 17, 15, 13, 11].map(x => x * 1000);
+  const peaks = [17, 18, 19];
+  const out = K.fillValley(base, [{ kw: 3, hours: 1, start: 18 }], 1000000, peaks); // 3,000 MW out of 6 PM
+  const total = a => a.reduce((x, y) => x + y, 0);
+  assert.ok(Math.abs(total(out) - total(base)) < 1e-6, "energy conserved");
+  assert.strictEqual(out[18], 17000);
+  assert.ok(Math.max(...out.filter((_, h) => !peaks.includes(h))) <= 17000, "no new peak");
+  assert.ok(out[2] > 8000, "night valley filled first");
+});
 console.log(`\n${pass} passed`);
