@@ -1,6 +1,0 @@
-{
-  "version": "2026-10-23",
-  "note": "Tone is scored from the title only. Each conflict word adds 1. A title that is mostly capital letters adds 1. Two or more exclamation or question marks in a row add 1. A score of 2 or more is labeled conflict. A score of 0 with at least one explaining word is labeled explaining. Everything else is neutral.",
-  "conflict": ["destroys", "destroyed", "slams", "slammed", "owned", "owns", "humiliates", "humiliated", "meltdown", "melts down", "rage", "furious", "outrage", "outraged", "exposed", "exposes", "caught", "lies", "liar", "lying", "corrupt", "evil", "insane", "unhinged", "disgusting", "traitor", "traitors", "war on", "attack on", "coming for", "they don't want you to know", "wake up", "shocking", "nobody is talking about", "crushes", "obliterates", "screams", "freaks out", "losing it", "breaking", "chaos", "disaster", "betrayal", "betrayed", "rigged", "scam"],
-  "explaining": ["explained", "explainer", "how", "why", "what is", "what's in", "what does", "breakdown", "broken down", "in 60 seconds", "in one minute", "the facts", "fact check", "data", "chart", "map", "history of", "timeline", "what happened", "read the bill", "bill text", "both sides", "pros and cons", "vote count", "roll call", "summary", "step by step"]
-}
